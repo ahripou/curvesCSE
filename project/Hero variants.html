@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Curves · Hero variants</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="canvas-styles.css" />
+</head>
+<body style="margin:0">
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="logo.jsx"></script>
+<script type="text/babel">
+
+// -------- Shared mini-nav ------
+function MiniNav({ light }) {
+  return (
+    <div className="nav-mock" style={{ color: light ? 'white' : 'inherit' }}>
+      <Logo size={28} ink={light ? 'white' : 'var(--ink)'} color={light ? 'white' : 'var(--brand)'} />
+      <div className="links" style={{ color: light ? 'rgba(255,255,255,0.9)' : 'var(--ink)' }}>
+        <span>Méthode</span><span>Programme</span><span>Communauté</span><span>FAQ</span>
+      </div>
+      <button className={`btn ${light ? 'btn-white' : 'btn-primary'}`}>Essai gratuit →</button>
+    </div>
+  );
+}
+
+// -------- Variant A — Editorial split ------
+function HeroA() {
+  return (
+    <div className="hv hv-a">
+      <div>
+        <MiniNav />
+        <div className="eyebrow" style={{ marginBottom: 24 }}>● Club féminin · Depuis 2008</div>
+        <div className="display head">
+          <span>Forte en</span><br/>
+          <span className="brand">30 min.</span><br/>
+          <span className="outline">Pas plus.</span>
+        </div>
+        <div style={{ marginTop: 32, maxWidth: 400, fontSize: 15, lineHeight: 1.5, color: 'var(--ink-60)' }}>
+          Circuit training pensé pour les femmes. Musculation, cardio, étirements. Coachée.
+        </div>
+        <div style={{ display: 'flex', gap: 12, marginTop: 24 }}>
+          <button className="btn btn-primary">Réserver ma séance →</button>
+          <button className="btn btn-ghost">Voir le programme</button>
+        </div>
+      </div>
+      <div style={{ position: 'relative', paddingTop: 64 }}>
+        <div style={{ position: 'absolute', top: 24, right: 0, textAlign: 'right' }} className="mono">
+          <div>◉ Saint-Étienne, BE</div>
+          <div>Ouvert · Lun–Ven · Sam</div>
+        </div>
+        <div className="ph media" style={{ height: '100%' }}>
+          <div className="ph-label">portrait membre</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// -------- Variant B — Full-bleed magenta manifesto ------
+function HeroB() {
+  return (
+    <div className="hv hv-b">
+      <MiniNav light />
+      <div>
+        <div className="eyebrow" style={{ color: 'rgba(255,255,255,0.9)', marginBottom: 20 }}>● La méthode Curves</div>
+        <div className="display head">
+          30 minutes.<br/>
+          <span className="outline">Toute une</span><br/>
+          semaine.
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 40 }}>
+          <div style={{ maxWidth: 440, fontSize: 16, lineHeight: 1.5, opacity: 0.9 }}>
+            Un circuit, une coach, douze machines. Vous entrez, vous transpirez, vous repartez. Le reste, c'est du temps pour vous.
+          </div>
+          <button className="btn btn-white">Je réserve →</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// -------- Variant C — Centered photo w/ arcs ------
+function HeroC() {
+  return (
+    <div className="hv hv-c">
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, padding: '24px 48px', zIndex: 2 }}>
+        <MiniNav />
+      </div>
+      <Arc size={480} stroke={110} sweep={220} start={-20}
+        style={{ position: 'absolute', top: -80, left: -140, opacity: 0.13 }} />
+      <Arc size={320} stroke={70} sweep={160} start={160}
+        style={{ position: 'absolute', bottom: -60, right: -80, opacity: 0.1, color: 'var(--ink)' }} />
+
+      <div className="eyebrow" style={{ marginTop: 80 }}>● 600 femmes chaque mois</div>
+      <div className="display head">
+        La force<br/>
+        <span style={{ color: 'var(--brand)' }}>en trente</span><br/>
+        minutes.
+      </div>
+      <button className="btn btn-ink" style={{ marginTop: 12 }}>Séance d'essai offerte →</button>
+    </div>
+  );
+}
+
+// -------- Variant D — Dark manifesto ------
+function HeroD() {
+  return (
+    <div className="hv hv-d">
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, padding: '24px 48px', zIndex: 3 }}>
+        <MiniNav light />
+      </div>
+      <Arc size={560} stroke={120} sweep={180} start={-90}
+        style={{ position: 'absolute', bottom: -240, left: -160, color: 'rgba(230,0,126,0.25)' }} />
+      <div style={{ zIndex: 2 }}>
+        <div className="eyebrow" style={{ marginBottom: 20 }}>● Entre femmes, depuis 2008</div>
+        <div className="display head">
+          Pas de miroirs.<br/>
+          Pas de regards.<br/>
+          <span className="brand">Que du muscle.</span>
+        </div>
+      </div>
+      <div style={{ zIndex: 2, display: 'flex', flexDirection: 'column', gap: 16 }}>
+        <div style={{ fontSize: 16, lineHeight: 1.5, opacity: 0.75, maxWidth: 400 }}>
+          Curves Saint-Étienne. Circuit hydraulique, coaching humain, résultats qui tiennent.
+        </div>
+        <div style={{ display: 'flex', gap: 12 }}>
+          <button className="btn btn-primary">Essai offert →</button>
+          <button className="btn" style={{ border: '1.5px solid rgba(255,255,255,0.3)', color: 'white' }}>
+            La méthode
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// -------- Variant E — Full-bleed image + gradient ------
+function HeroE() {
+  return (
+    <div className="hv hv-e">
+      <div className="photo ph">
+        <div className="ph-label" style={{ color: 'rgba(14,14,16,0.5)' }}>séance en club</div>
+      </div>
+      <div className="overlay" />
+      <div className="content">
+        <MiniNav light />
+        <div>
+          <div className="eyebrow" style={{ color: 'rgba(255,255,255,0.95)', marginBottom: 20 }}>● Nouveau club · Saint-Étienne</div>
+          <div className="display head">
+            Trente<br/>
+            minutes<br/>
+            qui changent<br/>
+            <span style={{ WebkitTextStroke: '2px white', color: 'transparent' }}>la donne.</span>
+          </div>
+          <div style={{ display: 'flex', gap: 12, marginTop: 32 }}>
+            <button className="btn btn-white">Réserver →</button>
+            <button className="btn" style={{ color: 'white', border: '1.5px solid rgba(255,255,255,0.6)' }}>
+              Le programme
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// -------- Variant F — Giant type + arc ------
+function HeroF() {
+  return (
+    <div className="hv hv-f">
+      <MiniNav />
+      <Arc size={700} stroke={160} sweep={200} start={-20}
+        style={{ position: 'absolute', top: -120, right: -200, color: 'var(--brand-soft)', zIndex: 1 }} />
+      <div className="eyebrow" style={{ marginTop: 8, position: 'relative', zIndex: 2 }}>● Curves · Saint-Étienne</div>
+      <div className="display head" style={{ marginTop: 16 }}>
+        Curves<br/>
+        <span className="outline">change</span><br/>
+        <span className="brand">tout.</span>
+      </div>
+      <div className="bottom-row">
+        <div className="lede">
+          Circuit training féminin, 30 minutes, tous les jours. Le format qui tient
+          dans votre semaine — et qui tient sur la durée.
+        </div>
+        <button className="btn btn-primary">Séance d'essai →</button>
+      </div>
+    </div>
+  );
+}
+
+// -------- Canvas ------
+function App() {
+  return (
+    <DesignCanvas>
+      <div style={{ padding: '40px 60px 20px', fontFamily: 'var(--body)' }}>
+        <div style={{
+          fontFamily: 'var(--display)', fontWeight: 800, fontSize: 36,
+          letterSpacing: '-0.02em', textTransform: 'uppercase', color: 'rgba(40,30,20,0.88)'
+        }}>
+          Curves · Hero Explorations
+        </div>
+        <div style={{ fontSize: 14, color: 'rgba(60,50,40,0.6)', marginTop: 6, maxWidth: 680 }}>
+          Six directions pour la hero. Toutes sur la même grille type & couleur — ce qui change,
+          c'est le <em>rythme</em>, la densité, et comment le magenta signature est utilisé.
+          Scroll pour panner, pinch pour zoomer.
+        </div>
+      </div>
+
+      <DCSection title="Row 1 — Clair & édition" subtitle="Sur fond crème, hiérarchie classique, image à droite/centre">
+        <DCArtboard label="A · Editorial split" width={1200} height={760}>
+          <HeroA />
+        </DCArtboard>
+        <DCArtboard label="C · Centered mark" width={1200} height={760}>
+          <HeroC />
+        </DCArtboard>
+        <DCArtboard label="F · Giant type + arc" width={1200} height={760}>
+          <HeroF />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection title="Row 2 — Audacieux & saturé" subtitle="Fond magenta ou noir, copies plus manifeste, moins d'images">
+        <DCArtboard label="B · Full-bleed magenta" width={1200} height={760}>
+          <HeroB />
+        </DCArtboard>
+        <DCArtboard label="D · Dark manifesto" width={1200} height={760}>
+          <HeroD />
+        </DCArtboard>
+        <DCArtboard label="E · Photo + gradient overlay" width={1200} height={760}>
+          <HeroE />
+        </DCArtboard>
+      </DCSection>
+
+      <DCPostIt top={240} left={20} rotate={-4} width={200}>
+        A = la version du prototype live. C et F mettent le logo/marque au centre.
+      </DCPostIt>
+
+      <DCPostIt top={1060} left={20} rotate={3} width={200}>
+        B et D = audacieux, manifeste. E = éditorial, parfait si on a de la vraie photo.
+      </DCPostIt>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

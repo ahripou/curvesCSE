@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Curves · Court-Saint-Étienne</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Archivo:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+  // Tweaks defaults
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "accent": "#5B2A86"
+  }/*EDITMODE-END*/;
+
+  // Apply on load
+  (function(){
+    const root = document.documentElement;
+    const dark = (hex) => {
+      // simple darken by ~25%
+      const n = parseInt(hex.slice(1), 16);
+      const r = Math.max(0, ((n >> 16) & 255) - 40);
+      const g = Math.max(0, ((n >> 8) & 255) - 40);
+      const b = Math.max(0, (n & 255) - 40);
+      return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    };
+    const soft = (hex) => {
+      const n = parseInt(hex.slice(1), 16);
+      const r = Math.min(255, ((n >> 16) & 255) + 180);
+      const g = Math.min(255, ((n >> 8) & 255) + 180);
+      const b = Math.min(255, (n & 255) + 180);
+      return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    };
+    window.applyAccent = (hex) => {
+      root.style.setProperty('--brand', hex);
+      root.style.setProperty('--brand-dark', dark(hex));
+      root.style.setProperty('--brand-soft', soft(hex));
+    };
+    window.applyAccent(TWEAK_DEFAULTS.accent);
+  })();
+</script>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="logo.jsx"></script>
+<script type="text/babel" src="sections.jsx"></script>
+<script type="text/babel">
+function App() {
+  const [tweaksVisible, setTweaksVisible] = React.useState(false);
+  const [accent, setAccent] = React.useState(window.__TWEAK_ACCENT || '#5B2A86');
+
+  React.useEffect(() => {
+    const handler = (e) => {
+      if (e.data?.type === '__activate_edit_mode') setTweaksVisible(true);
+      if (e.data?.type === '__deactivate_edit_mode') setTweaksVisible(false);
+    };
+    window.addEventListener('message', handler);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', handler);
+  }, []);
+
+  const swatches = [
+    { name: 'Violet Curves (signature)', hex: '#5B2A86' },
+    { name: 'Prune profonde', hex: '#3E1C5C' },
+    { name: 'Magenta', hex: '#E6007E' },
+    { name: 'Framboise', hex: '#D81159' },
+    { name: 'Encre', hex: '#0E0E10' },
+    { name: 'Émeraude', hex: '#0E8A6B' },
+  ];
+
+  const setSwatch = (hex) => {
+    setAccent(hex);
+    window.applyAccent(hex);
+    window.parent.postMessage({
+      type: '__edit_mode_set_keys',
+      edits: { accent: hex }
+    }, '*');
+  };
+
+  return (
+    <>
+      <Nav />
+      <Hero />
+      <Marquee />
+      <Method />
+      <Program />
+      <Stats />
+      <CommunityBanner />
+      <Testimonials />
+      <Coaches />
+      <Pricing />
+      <FAQ />
+      <Trial />
+      <Footer />
+
+      <div className={`tweaks-panel ${tweaksVisible ? 'visible' : ''}`}>
+        <h5>Accent</h5>
+        <div className="swatch-row">
+          {swatches.map(s => (
+            <button
+              key={s.hex}
+              className={`swatch ${accent === s.hex ? 'active' : ''}`}
+              style={{ background: s.hex }}
+              onClick={() => setSwatch(s.hex)}
+              title={s.name}
+            />
+          ))}
+        </div>
+        <div style={{ fontSize: 11, color: 'var(--ink-60)', marginTop: 14, lineHeight: 1.4 }}>
+          Couleur signature du logo.<br/>Les dégradés s'ajustent automatiquement.
+        </div>
+      </div>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

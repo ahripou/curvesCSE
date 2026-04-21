@@ -1,0 +1,172 @@
+/* Canvas-specific styles — shared vars mirror styles.css */
+:root {
+  --brand: #E6007E;
+  --brand-dark: #B0005E;
+  --brand-soft: #FFE5F0;
+  --ink: #0E0E10;
+  --ink-60: rgba(14, 14, 16, 0.64);
+  --ink-15: rgba(14, 14, 16, 0.14);
+  --paper: #FBF7F4;
+  --paper-2: #F3ECE6;
+  --display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --body: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+.hv {
+  width: 1200px; height: 760px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  position: relative;
+  overflow: hidden;
+}
+.hv .mono {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.hv .eyebrow {
+  font-family: var(--display);
+  font-weight: 700; font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--brand);
+}
+.hv .display {
+  font-family: var(--display);
+  font-weight: 800; font-stretch: 85%;
+  line-height: 0.92; letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+.hv .btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 20px;
+  font-family: var(--display);
+  font-weight: 700; font-size: 12px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  border-radius: 999px; cursor: pointer;
+  border: 0;
+}
+.hv .btn-primary { background: var(--brand); color: white; }
+.hv .btn-ghost { background: transparent; border: 1.5px solid var(--ink); color: var(--ink); }
+.hv .btn-white { background: white; color: var(--ink); }
+.hv .btn-ink { background: var(--ink); color: var(--paper); }
+
+/* Variant A — Editorial split */
+.hv-a {
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  padding: 72px 64px 64px;
+  gap: 48px;
+}
+.hv-a .head { font-size: 104px; }
+.hv-a .brand { color: var(--brand); }
+.hv-a .outline { -webkit-text-stroke: 2px var(--ink); color: transparent; }
+.hv-a .media {
+  background: var(--paper-2);
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* Variant B — Full-bleed magenta */
+.hv-b {
+  background: var(--brand);
+  color: white;
+  padding: 72px 64px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.hv-b .head { font-size: 140px; }
+.hv-b .outline { -webkit-text-stroke: 2px white; color: transparent; }
+
+/* Variant C — Centered, circular photo */
+.hv-c {
+  padding: 64px; text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 36px;
+}
+.hv-c .head { font-size: 120px; text-align: center; }
+.hv-c .circle {
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: var(--paper-2);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Variant D — Dark manifesto */
+.hv-d {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 72px 64px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 48px; align-items: end;
+}
+.hv-d .head { font-size: 108px; }
+.hv-d .brand { color: var(--brand); }
+.hv-d .outline { -webkit-text-stroke: 2px var(--paper); color: transparent; }
+
+/* Variant E — Magazine, full-bleed image with overlay */
+.hv-e {
+  padding: 0;
+  position: relative;
+}
+.hv-e .photo {
+  position: absolute; inset: 0;
+  background: var(--paper-2);
+}
+.hv-e .overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(230,0,126,0.75), rgba(14,14,16,0.3) 70%);
+}
+.hv-e .content {
+  position: absolute; inset: 0;
+  padding: 72px 64px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  color: white;
+}
+.hv-e .head { font-size: 128px; }
+
+/* Variant F — Asymmetric stack with arc motif */
+.hv-f {
+  padding: 64px;
+  position: relative;
+}
+.hv-f .head {
+  font-size: 156px;
+  position: relative;
+  z-index: 2;
+}
+.hv-f .brand { color: var(--brand); }
+.hv-f .outline { -webkit-text-stroke: 2px var(--ink); color: transparent; }
+.hv-f .bottom-row {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-top: 40px;
+  position: relative; z-index: 2;
+}
+.hv-f .lede { max-width: 340px; font-size: 15px; line-height: 1.5; color: var(--ink-60); }
+
+/* Placeholder */
+.ph {
+  position: relative;
+  background: var(--paper-2);
+  overflow: hidden;
+}
+.ph::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    45deg, transparent 0, transparent 14px,
+    rgba(14,14,16,0.045) 14px, rgba(14,14,16,0.045) 15px
+  );
+}
+.ph-label {
+  position: absolute; bottom: 12px; left: 12px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-60);
+}
+.ph-label::before { content: '[ image ] '; color: var(--brand); }
+
+.nav-mock {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 48px;
+}
+.nav-mock .links { display: flex; gap: 20px; font-family: var(--display); font-weight: 600; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; }

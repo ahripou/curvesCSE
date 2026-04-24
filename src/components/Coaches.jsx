@@ -1,9 +1,9 @@
 const team = [
-  { name: 'Maud', role: 'Manager', img: '/img/coach-maud.jpg' },
-  { name: 'Virginie', role: 'Coach', img: '/img/coach-virginie.jpg' },
-  { name: 'Axelle', role: 'Coach', img: '/img/coach-axelle.jpg' },
-  { name: 'Béatrice', role: 'Coach', img: '/img/coach-beatrice.jpg' },
-  { name: 'Camille', role: 'Coach', img: '/img/coach-camille.jpg' },
+  { name: 'Maud', role: 'Manager', img: 'img/coach-maud.jpg' },
+  { name: 'Virginie', role: 'Coach', img: 'img/coach-virginie.jpg' },
+  { name: 'Axelle', role: 'Coach', img: 'img/coach-axelle.jpg' },
+  { name: 'Béatrice', role: 'Coach', img: 'img/coach-beatrice.jpg' },
+  { name: 'Camille', role: 'Coach', img: 'img/coach-camille.jpg' },
 ]
 
 export function Coaches() {

@@ -3,7 +3,7 @@ export function CommunityBanner() {
     <section style={{ padding: 0, position: 'relative' }}>
       <div style={{
         height: 'min(80vh, 720px)',
-        backgroundImage: 'url(/img/community.jpg)',
+        backgroundImage: 'url(img/community.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         position: 'relative',

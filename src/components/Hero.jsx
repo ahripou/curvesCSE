@@ -16,7 +16,7 @@ export function Hero() {
 
       <div
         className="hero-media"
-        style={{ backgroundImage: 'url(/img/hero.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+        style={{ backgroundImage: 'url(img/hero.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
       />
 
       <div className="hero-inner">
